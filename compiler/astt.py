@@ -6,9 +6,9 @@ structure of the ast:
     'children': <LIST>
 }
 '''
-keywords = ('if', 'endif', 'else', 'endelse', 'elseif', 'endelseif', 'while', 'endwhile', 'true', 'false', 'print', 'read',"func", "endfunc")
-functions = ();
+keywords = ('if', 'endif', 'true', 'false', 'print', 'read')
 variables = ();
+
 def ast(lexed:str):
     '''
     makes an action tree out of the lexed data
@@ -17,10 +17,12 @@ def ast(lexed:str):
     index = 0
     
     while index < len(lexed):
+        current_d = 1
         if lexed[index]['type'] == 'KEYWORD':
-            if lexed[index]['value'] in keywords or lexed[index]['value'] in functions:
+            if lexed[index]['value'] in keywords:
+                ast.add
                 index += 1
-                continue
+                
             else:
                 raise Exception("Syntax Error: Unknown keyword or synax error: " + lexed[index]['value'])
     

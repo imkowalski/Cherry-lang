@@ -1,6 +1,1 @@
-$name = read "enter a name >";
-print "Hello " $name;
-print (2-4);
-if (true) then
-print "Im True!!";
-endif;
+print "Hello World";
