@@ -11,27 +11,7 @@ Token Schema:
 """
 
 
-
-
-
-chars = ("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
-ints = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
-operators = ('+', '-', '*', '/')
-operator_name = {
-    '+': 'PLUS',
-    '-': 'MINUS',
-    '*': 'MULTIPLICATION',
-    '/': 'DEVISION',
-}
-parantasis = ('(', ')', '[', ']')
-parantasis_name = {
-    '(': 'LEFT_PARANTHASIS',
-    ')': 'RIGHT_PARANTHASIS',
-    '[': 'LEFT_BRACKET',
-    ']': 'RIGHT_BRACKET',
-}
-strings = ('"', "'")
-
+from cherry_types import *
 
 
 def lex(inp: str):
@@ -63,7 +43,7 @@ def lex(inp: str):
                 
             tokens.append({'type': 'INT', 'value': temp})
         elif inp[index] in operators:
-            tokens.append({'type': operator_name[inp[index]], 'value': inp[index]})
+            tokens.append({'type': "OPERATOR",'operator_type':operator_name[inp[index]], 'value': inp[index]})
             index += 1
         elif inp[index] in strings:
             sr = inp[index]
@@ -73,8 +53,6 @@ def lex(inp: str):
                 index += 1
                 if index >= len(inp):
                     break
-                if inp[index] == ";":
-                    raise Exception("Syntax Error: Unclosed string, at line: " + str(line))
                 if inp[index] == '\n':
                     raise Exception("Syntax Error: Unclosed string, at line: " + str(line))
                 if inp[index] == sr:
@@ -98,9 +76,6 @@ def lex(inp: str):
         elif inp[index] in parantasis:
             tokens.append({'type': parantasis_name[inp[index]], 'value': inp[index]})
             index += 1
-        elif inp[index] == ';':
-            tokens.append({'type': 'SEMICOLON', 'value': inp[index]})
-            index += 1
         elif inp[index] == '#':
             temp = ""
             while True:
@@ -119,8 +94,6 @@ def lex(inp: str):
                     break
                 if inp[index] == '\n':
                     break
-                if inp[index] == ';':
-                        break
                 if inp[index] == '=':
                     break
                 if inp[index] == ' ':
@@ -136,4 +109,5 @@ def lex(inp: str):
             index += 1
         else:
             raise Exception('Invalid character: ' + inp[index] + ' at line ' + str(line))
+    tokens.append({'type': 'EOF', 'value': None})
     return tokens
