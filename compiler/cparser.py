@@ -18,19 +18,16 @@ def ast(lexer):
     ast = []
     line = 0
     nodes = {}
-    return gen_nodes(0, lexer)
+    return gen_tree(0, lexer)
     
+ 
+ 
+def gen_tree(index, lexer):
+    current = lexer[index]
+    if current != '\n':
+        next = lexer[index + 1]
+    
+    
+ 
         
 
-class Expression:
-    def __init__(self,left,operator,right):
-        self.left = left
-        self.operator = operator
-        self.right = right   
-    
-    def __str__(self):
-        return "Left:" + str(self.left) + " Operator:" + str(self.operator) + " right:" + str(self.right)
-    
-    
-    def __repr__(self):
-        return self.__str__()
