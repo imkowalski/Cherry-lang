@@ -39,7 +39,7 @@ def gen_branch(index, lexer,left = None):
     if next.type == "OPERATOR":
         nnnext = lexer[index + 3]
         
-        if nnnext.type == "OPERATOR" and priority[nnnext.operator_type] > priority[next.operator_type]:
+        if nnnext.type == "OPERATOR" and priority[nnnext.operator_type] >= priority[next.operator_type]:
             right,end_index = gen_branch(index + 2, lexer)
             if left == None :
                 left = current
@@ -69,7 +69,7 @@ def gen_tree(lexer):
     previous = None
     while True:
         branch,index = gen_branch(index, lexer,previous)
-        if lexer[index].type == "EOF":
+        if lexer[index].type == "EOF" or lexer[index].type == "NEWLINE":
             break;
         previous = branch
     return previous
