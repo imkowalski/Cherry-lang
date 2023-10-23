@@ -3,24 +3,22 @@ ints = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
 
 operators = ('+', '-', '*', '/')
 operator_name = {
-    '+': 'PLUS',
-    '-': 'MINUS',
+    '+': 'ADDITION',
+    '-': 'SUBTRACTION',
     '*': 'MULTIPLICATION',
     '/': 'DEVISION',
 }
 operators_type = [
-    'PLUS',
-    'MINUS',
+    'ADDITION',
+    'SUBTRACTION',
     'MULTIPLICATION',
     'DEVISION'
 ]
 
-parantasis = ('(', ')', '[', ']')
+parantasis = ('(', ')')
 parantasis_name = {
     '(': 'LEFT_PARANTHASIS',
     ')': 'RIGHT_PARANTHASIS',
-    '[': 'LEFT_BRACKET',
-    ']': 'RIGHT_BRACKET',
 }
 
 strings = ('"', "'")
@@ -29,3 +27,13 @@ assignment = '='
 types = ["KEYWORD", "VARIABLE", "STRING", "INT", "FUNCTION", "OPERATOR"]
 
 in_built_function = ["print","get"]
+
+Priority = {
+    "ADDITION": 1,
+    "SUBTRACTION": 1,
+    "MULTIPLICATION": 2,
+    "DEVISION": 2,
+    "EXPONENT": 3,
+    "LEFT_PARANTHASIS": 4,
+    "RIGHT_PARANTHASIS": 4,
+}

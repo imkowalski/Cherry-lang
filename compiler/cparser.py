@@ -1,5 +1,6 @@
 
 '''
+Node Structure:
 [
     {
         "type": <EXPRESSION | COMMAND | ASSIGNMENT>,
@@ -15,36 +16,21 @@ from cherry_types import *
 #function that gnerates an abstract syntax tree
 def ast(lexer):
     ast = []
-    line = 0;
+    line = 0
     nodes = {}
-    return gen_branch(0, lexer)
+    return gen_nodes(0, lexer)
     
         
 
-def gen_branch(index, lexer):
-    current = lexer[index]
-    branch = {}
-    next = lexer[index+1]
-    if next["type"] == "EOF":
-        print("EOF")
-        return current["value"]
+class Expression:
+    def __init__(self,left,operator,right):
+        self.left = left
+        self.operator = operator
+        self.right = right   
     
-    print(current,next)
-    if next["type"] == "OPERATOR":
-        branch["type"] = "EXPRESSION"
-        if next["operator_type"] in operators_type:
-            branch["left"] = current["value"]
-            branch["operator"] = [k for k, v in operator_name.items() if v == next["operator_type"]][0]
-            branch["right"] = gen_branch(index+2, lexer)
-            return branch
-    if current["type"] in parantasis_name.values():
-        if next["type"] == "LEFT_PARANTHASIS":
-            gen_branch(index+1, lexer)
-
-        
-        
-        
-        
-        
+    def __str__(self):
+        return "Left:" + str(self.left) + " Operator:" + str(self.operator) + " right:" + str(self.right)
     
-       
+    
+    def __repr__(self):
+        return self.__str__()
