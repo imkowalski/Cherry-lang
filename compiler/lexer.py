@@ -19,7 +19,7 @@ def lex(inp: str):
         elif inp[index] == '\n': # if the char is a new line, increase the line number and add it as a token
             index += 1
             line += 1
-            tokens.append(Token('NEWLINE', '\\n'))
+            tokens.append(Token('NEWLINE', '\n'))
         elif (inp[index] in ints):
             temp = ""
             while True:
