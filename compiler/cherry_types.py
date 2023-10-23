@@ -26,9 +26,9 @@ assignment = '='
 
 types = ["KEYWORD", "VARIABLE", "STRING", "INT", "FUNCTION", "OPERATOR"]
 
-in_built_function = ["print","get"]
+ibuilt_in_function = ["print","get"]
 
-Priority = {
+priority = {
     "ADDITION": 1,
     "SUBTRACTION": 1,
     "MULTIPLICATION": 2,

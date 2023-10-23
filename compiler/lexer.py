@@ -1,16 +1,5 @@
 
-"""
-OPERATORS:
-PLUS + 
-MINUS -
-MULTIPLICATION *
-DEVISION /
-
-Token Schema:
-{type: <type>, value: <value>}
-"""
-
-
+from cherry_objects import Token,OperatorToken,ParantasisToken,AssignmentToken,VariableToken
 from cherry_types import *
 
 
@@ -30,7 +19,7 @@ def lex(inp: str):
         elif inp[index] == '\n': # if the char is a new line, increase the line number and add it as a token
             index += 1
             line += 1
-            tokens.append({'type': 'NEWLINE', 'value': '\n'})
+            tokens.append(Token('NEWLINE', '\\n'))
         elif (inp[index] in ints):
             temp = ""
             while True:
@@ -41,9 +30,9 @@ def lex(inp: str):
                 temp += inp[index]
                 index += 1
                 
-            tokens.append({'type': 'INT', 'value': temp})
+            tokens.append(Token('INT', int(temp)))
         elif inp[index] in operators:
-            tokens.append({'type': "OPERATOR",'operator_type':operator_name[inp[index]], 'value': inp[index]})
+            tokens.append(OperatorToken('OPERATOR',operator_name[inp[index]], inp[index]))
             index += 1
         elif inp[index] in strings:
             sr = inp[index]
@@ -61,7 +50,7 @@ def lex(inp: str):
                 
                 temp += inp[index]
                 
-            tokens.append({'type': 'STRING', 'value': temp})
+            tokens.append(Token('STRING', temp))
         elif inp[index].upper() in chars:
             temp = ""
             while True:
@@ -71,10 +60,10 @@ def lex(inp: str):
                     break
                 temp += inp[index]
                 index += 1
-            tokens.append({'type': 'KEYWORD', 'value': temp})
+            tokens.append(Token('CHAR', temp))
         
         elif inp[index] in parantasis:
-            tokens.append({'type': parantasis_name[inp[index]], 'value': inp[index]})
+            tokens.append(ParantasisToken('PARANTASIS', inp[index], parantasis[inp[index]]))
             index += 1
         elif inp[index] == '#':
             temp = ""
@@ -86,7 +75,7 @@ def lex(inp: str):
 
                 temp += inp[index]
                 index += 1
-            tokens.append({'type': 'COMMENT', 'value': temp})
+            tokens.append(Token('COMMENT', temp))
         elif inp[index] == '$':
             temp = ""
             while True:
@@ -100,14 +89,14 @@ def lex(inp: str):
                     break
                 temp += inp[index]
                 index += 1
-            tokens.append({'type': 'VARIABLE', 'value': temp})
+            tokens.append(VariableToken('VARIABLE', temp))
         elif inp[index] == ',':
-            tokens.append({'type': 'SEPERATOR', 'value': inp[index]})
+            tokens.append(Token('COMMA', inp[index]))
             index += 1
         elif inp[index] == '=':
-            tokens.append({'type': 'ASSIGN', 'value': inp[index]})
+            tokens.append(AssignmentToken('ASSIGNMENT', inp[index]))
             index += 1
         else:
             raise Exception('Invalid character: ' + inp[index] + ' at line ' + str(line))
-    tokens.append({'type': 'EOF', 'value': None})
+    tokens.append(Token('EOF', None))
     return tokens
