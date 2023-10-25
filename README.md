@@ -31,13 +31,13 @@ endif
 
 ### Function definition
 ````
-func <NAVN> using <ARGS> do 
+@<NAVN> using <ARGS> do
 ...
-endfunc
+@end
 ````
 ##### Function without input variable
 ````
-func <NAVN> using 0 do 
+@<NAVN> using 0 do 
 ...
-endfunc
+@end
 ````
